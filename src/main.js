@@ -1,14 +1,23 @@
-// polyfill
-import 'babel-polyfill';
+/* eslint-disable no-new */
+import 'babel-polyfill'
 
-import Vue from 'vue';
-import App from './App';
-import store from './store';
+import Vue from 'vue'
+import App from './App'
+import store from './store'
 
-Vue.config.devtools = true;
+Vue.directive('scroll-bottom', function(el, binding) {
+  console.info('scroll for ', el)
+  Vue.nextTick(() => {
+    console.info('nextTick scroll for ', el)
+    el.scrollTop = el.scrollHeight - el.clientHeight
+  })
+})
 
 new Vue({
-    el: 'body',
-    components: { App },
-    store: store
-});
+  el: '#app',
+  store,
+  template: '<App/>',
+  components: {App},
+})
+
+console.info('Launched Vue')
