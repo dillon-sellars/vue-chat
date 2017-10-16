@@ -8,7 +8,8 @@ export const SEND_MESSAGE = 'SEND_MESSAGE'
 export const SELECT_SESSION = 'SELECT_SESSION'
 
 const now = new Date()
-const store = new Vuex.Store({
+const chatModule = {
+  namespaced: true,
   state: {
     // Current user
     user: {
@@ -81,12 +82,17 @@ const store = new Vuex.Store({
       state.filterKey = value
     },
   },
+}
+
+const store = new Vuex.Store({
+  modules: {
+    chatModule: chatModule,
+  },
 })
 
 store.watch(
-  (state) => state.sessions,
+  (state) => state.chatModule.sessions,
   (val) => {
-    // console.log('CHANGE: ', val)
     localStorage.setItem('vue-chat-session', JSON.stringify(val))
   },
   {

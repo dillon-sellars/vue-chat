@@ -15,7 +15,7 @@
       }
     },
     methods: {
-      ...mapMutations({
+      ...mapMutations('chatModule', {
         'sendMessage': SEND_MESSAGE,
       }),
       onKeyup(e) {

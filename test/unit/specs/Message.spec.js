@@ -25,11 +25,16 @@ describe('Message.vue', () => {
       },
     }
     store = new Vuex.Store({
-      getters,
-      state: {
-        user: {
-          name: 'steve',
-          img: 'static/images/1.jpg',
+      modules: {
+        chatModule: {
+          namespaced: true,
+          getters,
+          state: {
+            user: {
+              name: 'steve',
+              img: 'static/images/1.jpg',
+            },
+          },
         },
       },
     })

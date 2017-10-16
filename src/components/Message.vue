@@ -17,15 +17,23 @@
 <script>
   import {mapState, mapGetters} from 'vuex'
   import {format} from 'date-fns'
+  import Vue from 'vue'
 
   export default {
     computed: {
-      ...mapState([
+      ...mapState('chatModule', [
         'user',
       ]),
-      ...mapGetters([
+      ...mapGetters('chatModule', [
         'currentSession',
       ]),
+    },
+    directives: {
+      'scroll-bottom': function(el, binding) {
+        Vue.nextTick(() => {
+          el.scrollTop = el.scrollHeight - el.clientHeight
+        })
+      },
     },
     filters: {
       // Filter the date to hour:minutes

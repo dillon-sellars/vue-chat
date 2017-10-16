@@ -3,34 +3,32 @@ import List from '@/components/List'
 import { mount } from 'avoriaz'
 import store from '@/store.js'
 import * as sinon from 'sinon'
+
 const match = sinon.match
 
 describe('List.vue', () => {
   let selectSessionSpy
 
   beforeEach(() => {
-    store.replaceState({
-      currentSessionId: 1,
-      filterKey: '',
-      sessions: [
-        {
-          id: 1,
-          user: {
-            name: 'Examples',
-            img: 'static/images/2.png',
-          },
+    store.state.chatModule.sessions = [
+      {
+        id: 1,
+        user: {
+          name: 'Examples',
+          img: 'static/images/2.png',
         },
-        {
-          id: 2,
-          user: {
-            name: 'gample',
-            img: 'static/images/3.png',
-          },
+      },
+      {
+        id: 2,
+        user: {
+          name: 'gample',
+          img: 'static/images/3.png',
         },
-      ],
-    })
-    selectSessionSpy = sinon.spy(store._mutations.SELECT_SESSION[0])
-    store._mutations.SELECT_SESSION[0] = selectSessionSpy
+      },
+    ]
+
+    selectSessionSpy = sinon.spy(store._mutations['chatModule/SELECT_SESSION'][0])
+    store._mutations['chatModule/SELECT_SESSION'][0] = selectSessionSpy
   })
 
   it('should render current session as active', () => {

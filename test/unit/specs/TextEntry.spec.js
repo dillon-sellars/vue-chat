@@ -3,6 +3,7 @@ import TextEntry from '@/components/TextEntry'
 import Vuex from 'vuex'
 import { mount } from 'avoriaz'
 import * as sinon from 'sinon'
+
 const match = sinon.match
 
 describe('TextEntry.vue', () => {
@@ -14,11 +15,16 @@ describe('TextEntry.vue', () => {
       'SEND_MESSAGE': sinon.stub(),
     }
     store = new Vuex.Store({
-      mutations,
-      state: {
-        user: {
-          name: 'steve',
-          img: 'static/images/1.jpg',
+      modules: {
+        chatModule: {
+          namespaced: true,
+          mutations,
+          state: {
+            user: {
+              name: 'steve',
+              img: 'static/images/1.jpg',
+            },
+          },
         },
       },
     })
@@ -26,7 +32,7 @@ describe('TextEntry.vue', () => {
 
   it('should call SEND_MESSAGE as pass along content', () => {
     const wrapper = mount(TextEntry, {mutations, store})
-    wrapper.setData({ content: 'a message from me' })
+    wrapper.setData({content: 'a message from me'})
     const textArea = wrapper.find('div.text textarea')[0]
     expect(textArea.value()).to.equal('a message from me')
     textArea.trigger('keyup.enter')

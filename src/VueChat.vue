@@ -23,12 +23,11 @@
     name: 'app',
     components: {Card, List, TextEntry, Message},
     methods: {
-      ...mapMutations({
+      ...mapMutations('chatModule', {
         'initData': INIT_DATA,
       }),
     },
     created() {
-      console.info('App.created')
       this.initData()
     },
   }

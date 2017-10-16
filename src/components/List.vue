@@ -15,12 +15,12 @@
 
   export default {
     methods: {
-      ...mapMutations({
+      ...mapMutations('chatModule', {
         'selectSession': SELECT_SESSION,
       }),
     },
     computed: {
-      ...mapGetters([
+      ...mapGetters('chatModule', [
         'sessions',
         'currentId',
       ]),
